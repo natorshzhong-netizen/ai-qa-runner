@@ -1,0 +1,35 @@
+[project]
+name = "ai-qa-runner"
+version = "0.1.0"
+description = "把自然语言需求变成可执行、可归因、可重复的端到端测试"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Cheng Zhong" }]
+dependencies = [
+  "playwright>=1.45,<2",
+  "pydantic>=2.7,<3",
+  "requests>=2.31,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8,<10", "ruff>=0.6"]
+
+[project.scripts]
+ai-qa-runner = "src.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["browser: 需要 Playwright 浏览器（CI 会安装 chromium）"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = ["E501"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011"]

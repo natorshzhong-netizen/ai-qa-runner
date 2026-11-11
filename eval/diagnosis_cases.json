@@ -1,0 +1,230 @@
+{
+  "description": "失败归因规则评测集：14 条带真实异常形态的失败信号 + 期望分类",
+  "items": [
+    {
+      "id": "dx-env-dns",
+      "expected": "environment",
+      "signal": {
+        "case_id": "dx-env-dns",
+        "step_index": 0,
+        "action": "goto",
+        "error_kind": "navigation_error",
+        "message": "net::ERR_NAME_NOT_RESOLVED at http://shop.invalid/",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": null
+      }
+    },
+    {
+      "id": "dx-env-refused",
+      "expected": "environment",
+      "signal": {
+        "case_id": "dx-env-refused",
+        "step_index": 0,
+        "action": "goto",
+        "error_kind": "navigation_error",
+        "message": "net::ERR_CONNECTION_REFUSED at http://127.0.0.1:1/",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": null
+      }
+    },
+    {
+      "id": "dx-env-timeout",
+      "expected": "environment",
+      "signal": {
+        "case_id": "dx-env-timeout",
+        "step_index": 0,
+        "action": "goto",
+        "error_kind": "navigation_timeout",
+        "message": "Page.goto: Timeout 15000ms exceeded.",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": null
+      }
+    },
+    {
+      "id": "dx-app-http-500",
+      "expected": "app_defect",
+      "signal": {
+        "case_id": "dx-app-http-500",
+        "step_index": 0,
+        "action": "goto",
+        "error_kind": "navigation_error",
+        "message": "Page returned HTTP 500",
+        "page_errors": [],
+        "console_errors": ["error: Uncaught server error"],
+        "failed_requests": [],
+        "http_status": 500
+      }
+    },
+    {
+      "id": "dx-locator-missing",
+      "expected": "locator",
+      "signal": {
+        "case_id": "dx-locator-missing",
+        "step_index": 2,
+        "action": "click",
+        "error_kind": "locator_timeout",
+        "message": "Locator.click: Timeout 5000ms exceeded. waiting for get_by_test_id(\"checkout\")",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": 200
+      }
+    },
+    {
+      "id": "dx-locator-script-crash",
+      "expected": "app_defect",
+      "signal": {
+        "case_id": "dx-locator-script-crash",
+        "step_index": 2,
+        "action": "click",
+        "error_kind": "locator_timeout",
+        "message": "Locator.click: Timeout 5000ms exceeded.",
+        "page_errors": ["TypeError: Cannot read properties of undefined (reading 'map')"],
+        "console_errors": ["error: Uncaught TypeError"],
+        "failed_requests": [],
+        "http_status": 200
+      }
+    },
+    {
+      "id": "dx-app-assert",
+      "expected": "app_defect",
+      "signal": {
+        "case_id": "dx-app-assert",
+        "step_index": 5,
+        "action": "expect_text",
+        "error_kind": "assertion",
+        "message": "Locator expected to contain text '¥598'. Actual: '¥299'",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": 200
+      }
+    },
+    {
+      "id": "dx-env-request-failed",
+      "expected": "environment",
+      "signal": {
+        "case_id": "dx-env-request-failed",
+        "step_index": 4,
+        "action": "expect_visible",
+        "error_kind": "assertion",
+        "message": "Locator expected to be visible.",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": ["POST http://127.0.0.1:8000/api/cart — net::ERR_CONNECTION_RESET"],
+        "http_status": 200
+      }
+    },
+    {
+      "id": "dx-app-url",
+      "expected": "app_defect",
+      "signal": {
+        "case_id": "dx-app-url",
+        "step_index": 6,
+        "action": "expect_url",
+        "error_kind": "assertion_timeout",
+        "message": "Page expected to have URL /dashboard.",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": 200
+      }
+    },
+    {
+      "id": "dx-app-assert-pageerror",
+      "expected": "app_defect",
+      "signal": {
+        "case_id": "dx-app-assert-pageerror",
+        "step_index": 5,
+        "action": "expect_visible",
+        "error_kind": "assertion",
+        "message": "Locator expected to be visible.",
+        "page_errors": ["ReferenceError: cart is not defined"],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": 200
+      }
+    },
+    {
+      "id": "dx-case-script",
+      "expected": "case_error",
+      "signal": {
+        "case_id": "dx-case-script",
+        "step_index": 1,
+        "action": "script",
+        "error_kind": "case_error",
+        "message": "用例动作本身无法执行",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": null
+      }
+    },
+    {
+      "id": "dx-case-action",
+      "expected": "case_error",
+      "signal": {
+        "case_id": "dx-case-action",
+        "step_index": 1,
+        "action": "click",
+        "error_kind": "action_error",
+        "message": "Unknown key: NotAKey",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": 200
+      }
+    },
+    {
+      "id": "dx-unknown",
+      "expected": "unknown",
+      "signal": {
+        "case_id": "dx-unknown",
+        "step_index": 1,
+        "action": "click",
+        "error_kind": "weird_failure",
+        "message": "Browser closed unexpectedly",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": null
+      }
+    },
+    {
+      "id": "dx-env-console-only",
+      "expected": "environment",
+      "signal": {
+        "case_id": "dx-env-console-only",
+        "step_index": 0,
+        "action": "goto",
+        "error_kind": "navigation_timeout",
+        "message": "Page.goto: Timeout 15000ms exceeded.",
+        "page_errors": [],
+        "console_errors": ["error: net::ERR_INTERNET_DISCONNECTED"],
+        "failed_requests": [],
+        "http_status": null
+      }
+    },
+    {
+      "id": "dx-app-http-500-locator",
+      "expected": "app_defect",
+      "signal": {
+        "case_id": "dx-app-http-500-locator",
+        "step_index": 1,
+        "action": "click",
+        "error_kind": "locator_timeout",
+        "message": "Locator.click: Timeout 2000ms exceeded. waiting for get_by_test_id(\"checkout\")",
+        "page_errors": [],
+        "console_errors": [],
+        "failed_requests": [],
+        "http_status": 500
+      }
+    }
+  ]
+}

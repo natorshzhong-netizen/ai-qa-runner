@@ -1,0 +1,341 @@
+{
+  "description": "用例 schema 有效性判定集：11 条合法 + 14 条非法，逐条带期望标签",
+  "items": [
+    {
+      "expected_valid": true,
+      "note": "最小合法用例",
+      "case": {
+        "id": "valid-minimal",
+        "title": "最小合法用例",
+        "requirement_ref": "r.md#R1",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "expect_visible", "target": { "by": "text", "value": "欢迎" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "role 定位",
+      "case": {
+        "id": "valid-role-click",
+        "title": "role 定位按钮",
+        "requirement_ref": "r.md#R2",
+        "steps": [
+          { "action": "goto", "url": "/login" },
+          { "action": "click", "target": { "by": "role", "role": "button", "name": "登录" } },
+          { "action": "expect_visible", "target": { "by": "testid", "value": "dashboard" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "fill 空字符串表示清空",
+      "case": {
+        "id": "valid-empty-fill",
+        "title": "清空用户名",
+        "requirement_ref": "r.md#R3",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "fill", "target": { "by": "label", "value": "用户名" }, "value": "" },
+          { "action": "expect_hidden", "target": { "by": "text", "value": "欢迎" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "text 精确匹配",
+      "case": {
+        "id": "valid-text-exact",
+        "title": "精确匹配提示文案",
+        "requirement_ref": "r.md#R4",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "expect_text", "target": { "by": "text", "value": "保存成功", "exact": true }, "value": "保存成功" }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "绝对地址",
+      "case": {
+        "id": "valid-absolute-url",
+        "title": "绝对地址打开页面",
+        "requirement_ref": "r.md#R5",
+        "steps": [
+          { "action": "goto", "url": "http://127.0.0.1:8000/" },
+          { "action": "expect_visible", "target": { "by": "css", "value": "#app" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "css 兜底与 expect_value",
+      "case": {
+        "id": "valid-css-value",
+        "title": "css 定位读取输入值",
+        "requirement_ref": "r.md#R6",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "click", "target": { "by": "css", "value": "#submit" } },
+          { "action": "expect_value", "target": { "by": "css", "value": "#name" }, "value": "alice" }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "placeholder 定位",
+      "case": {
+        "id": "valid-placeholder",
+        "title": "按 placeholder 搜索",
+        "requirement_ref": "r.md#R7",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "fill", "target": { "by": "placeholder", "value": "搜索商品" }, "value": "键盘" },
+          { "action": "expect_text", "target": { "by": "testid", "value": "count" }, "value": "1" }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "负向用例 + 显式优先级",
+      "case": {
+        "id": "valid-negative",
+        "title": "密码错误提示",
+        "requirement_ref": "r.md#R8",
+        "priority": "P0",
+        "type": "negative",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "fill", "target": { "by": "label", "value": "密码" }, "value": "x" },
+          { "action": "click", "target": { "by": "role", "role": "button", "name": "登录" } },
+          { "action": "expect_visible", "target": { "by": "text", "value": "密码错误" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "press + expect_url + regression",
+      "case": {
+        "id": "valid-regression",
+        "title": "回车提交后跳转",
+        "requirement_ref": "r.md#R9",
+        "type": "regression",
+        "tags": ["regression"],
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "press", "target": { "by": "label", "value": "用户名" }, "value": "Enter" },
+          { "action": "expect_url", "value": "/home" }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "一次多个断言",
+      "case": {
+        "id": "valid-multi-expect",
+        "title": "首页加载完成",
+        "requirement_ref": "r.md#R10",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "expect_url", "value": "/" },
+          { "action": "expect_hidden", "target": { "by": "text", "value": "加载中" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": true,
+      "note": "./ 开头的相对路径",
+      "case": {
+        "id": "valid-dot-url",
+        "title": "相对路径打开子页面",
+        "requirement_ref": "r.md#R11",
+        "steps": [
+          { "action": "goto", "url": "./index.html" },
+          { "action": "expect_visible", "target": { "by": "role", "role": "heading", "name": "首页" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "执行器不支持 hover",
+      "case": {
+        "id": "invalid-unknown-action",
+        "title": "未知动作",
+        "requirement_ref": "r.md#X1",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "hover", "target": { "by": "text", "value": "菜单" } },
+          { "action": "expect_visible", "target": { "by": "text", "value": "子菜单" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "role 定位缺 name",
+      "case": {
+        "id": "invalid-role-missing-name",
+        "title": "role 缺 name",
+        "requirement_ref": "r.md#X2",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "click", "target": { "by": "role", "role": "button" } },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "goto 缺 url",
+      "case": {
+        "id": "invalid-goto-missing-url",
+        "title": "goto 缺 url",
+        "requirement_ref": "r.md#X3",
+        "steps": [
+          { "action": "goto" },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "没有任何断言",
+      "case": {
+        "id": "invalid-no-assertion",
+        "title": "只有操作没有断言",
+        "requirement_ref": "r.md#X4",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "click", "target": { "by": "role", "role": "button", "name": "提交" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "首步不是 goto",
+      "case": {
+        "id": "invalid-first-step-not-goto",
+        "title": "首步不是 goto",
+        "requirement_ref": "r.md#X5",
+        "steps": [
+          { "action": "fill", "target": { "by": "label", "value": "用户名" }, "value": "alice" },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "fill 缺 value",
+      "case": {
+        "id": "invalid-fill-missing-value",
+        "title": "fill 缺 value",
+        "requirement_ref": "r.md#X6",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "fill", "target": { "by": "label", "value": "用户名" } },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "多出未知字段",
+      "case": {
+        "id": "invalid-extra-field",
+        "title": "未知字段",
+        "requirement_ref": "r.md#X7",
+        "selector": "#submit",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "id 不能有大写",
+      "case": {
+        "id": "Login-001",
+        "title": "大写 id",
+        "requirement_ref": "r.md#X8",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "css 定位不能带 role",
+      "case": {
+        "id": "invalid-css-role-mix",
+        "title": "定位字段混用",
+        "requirement_ref": "r.md#X9",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "click", "target": { "by": "css", "value": "#x", "role": "button" } },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "expect_url 不接受 target",
+      "case": {
+        "id": "invalid-expect-url-target",
+        "title": "expect_url 带 target",
+        "requirement_ref": "r.md#X10",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "expect_url", "value": "/home", "target": { "by": "text", "value": "home" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "steps 为空",
+      "case": {
+        "id": "invalid-empty-steps",
+        "title": "空步骤",
+        "requirement_ref": "r.md#X11",
+        "steps": []
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "禁止 javascript: 协议",
+      "case": {
+        "id": "invalid-javascript-url",
+        "title": "危险协议",
+        "requirement_ref": "r.md#X12",
+        "steps": [
+          { "action": "goto", "url": "javascript:alert(1)" },
+          { "action": "expect_visible", "target": { "by": "text", "value": "完成" } }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "expect_text 缺 target",
+      "case": {
+        "id": "invalid-expect-text-missing-target",
+        "title": "缺定位器",
+        "requirement_ref": "r.md#X13",
+        "steps": [
+          { "action": "goto", "url": "/" },
+          { "action": "expect_text", "value": "完成" }
+        ]
+      }
+    },
+    {
+      "expected_valid": false,
+      "note": "只有一步",
+      "case": {
+        "id": "invalid-single-step",
+        "title": "只有一步",
+        "requirement_ref": "r.md#X14",
+        "steps": [{ "action": "goto", "url": "/" }]
+      }
+    }
+  ]
+}

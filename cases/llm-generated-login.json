@@ -1,0 +1,303 @@
+{
+  "version": 1,
+  "generated_by": "ollama:qwen2.5-coder:7b",
+  "attempts": 1,
+  "source_url": "http://127.0.0.1:8000",
+  "cases": [
+    {
+      "id": "login-valid-account",
+      "title": "验证用户名和密码都正确时，登录成功并进入商城",
+      "requirement_ref": "R1",
+      "priority": "P0",
+      "type": "positive",
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/",
+          "description": "打开登录页面"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "by": "testid",
+            "value": "username",
+            "exact": false
+          },
+          "value": "alice",
+          "description": "输入用户名"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "by": "testid",
+            "value": "password",
+            "exact": false
+          },
+          "value": "secret123",
+          "description": "输入密码"
+        },
+        {
+          "action": "click",
+          "target": {
+            "by": "testid",
+            "value": "login-button",
+            "exact": false
+          },
+          "description": "点击登录按钮"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "text",
+            "value": "欢迎回来",
+            "exact": false
+          },
+          "description": "验证登录成功后显示欢迎信息"
+        },
+        {
+          "action": "expect_hidden",
+          "target": {
+            "by": "testid",
+            "value": "login-button",
+            "exact": false
+          },
+          "description": "验证登录表单消失"
+        }
+      ],
+      "tags": [
+        "登录",
+        "成功"
+      ]
+    },
+    {
+      "id": "login-invalid-credentials",
+      "title": "验证用户名或密码错误时，停留在登录页并显示错误信息",
+      "requirement_ref": "R2",
+      "priority": "P0",
+      "type": "negative",
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/",
+          "description": "打开登录页面"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "by": "testid",
+            "value": "username",
+            "exact": false
+          },
+          "value": "alice",
+          "description": "输入用户名"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "by": "testid",
+            "value": "password",
+            "exact": false
+          },
+          "value": "wrongpassword",
+          "description": "输入错误密码"
+        },
+        {
+          "action": "click",
+          "target": {
+            "by": "testid",
+            "value": "login-button",
+            "exact": false
+          },
+          "description": "点击登录按钮"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "testid",
+            "value": "login-message",
+            "exact": false
+          },
+          "value": "用户名或密码错误",
+          "description": "验证显示错误信息"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "testid",
+            "value": "username",
+            "exact": false
+          },
+          "description": "验证登录表单未消失"
+        }
+      ],
+      "tags": [
+        "登录",
+        "错误"
+      ]
+    },
+    {
+      "id": "login-empty-username",
+      "title": "验证用户名为空时，显示错误信息",
+      "requirement_ref": "R3",
+      "priority": "P0",
+      "type": "negative",
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/",
+          "description": "打开登录页面"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "by": "testid",
+            "value": "password",
+            "exact": false
+          },
+          "value": "secret123",
+          "description": "输入密码"
+        },
+        {
+          "action": "click",
+          "target": {
+            "by": "testid",
+            "value": "login-button",
+            "exact": false
+          },
+          "description": "点击登录按钮"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "testid",
+            "value": "login-message",
+            "exact": false
+          },
+          "value": "请输入用户名",
+          "description": "验证显示错误信息"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "testid",
+            "value": "username",
+            "exact": false
+          },
+          "description": "验证登录表单未消失"
+        }
+      ],
+      "tags": [
+        "登录",
+        "错误"
+      ]
+    },
+    {
+      "id": "login-empty-password",
+      "title": "验证密码为空时，显示错误信息",
+      "requirement_ref": "R4",
+      "priority": "P0",
+      "type": "negative",
+      "preconditions": [],
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/",
+          "description": "打开登录页面"
+        },
+        {
+          "action": "fill",
+          "target": {
+            "by": "testid",
+            "value": "username",
+            "exact": false
+          },
+          "value": "alice",
+          "description": "输入用户名"
+        },
+        {
+          "action": "click",
+          "target": {
+            "by": "testid",
+            "value": "login-button",
+            "exact": false
+          },
+          "description": "点击登录按钮"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "testid",
+            "value": "login-message",
+            "exact": false
+          },
+          "value": "请输入密码",
+          "description": "验证显示错误信息"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "testid",
+            "value": "password",
+            "exact": false
+          },
+          "description": "验证登录表单未消失"
+        }
+      ],
+      "tags": [
+        "登录",
+        "错误"
+      ]
+    },
+    {
+      "id": "logout-and-clear-cart",
+      "title": "验证退出登录后返回登录页并清空购物车",
+      "requirement_ref": "R6",
+      "priority": "P0",
+      "type": "positive",
+      "preconditions": [
+        "登录成功"
+      ],
+      "steps": [
+        {
+          "action": "goto",
+          "url": "/",
+          "description": "打开商城页面"
+        },
+        {
+          "action": "click",
+          "target": {
+            "by": "text",
+            "value": "退出登录",
+            "exact": false
+          },
+          "description": "点击退出登录按钮"
+        },
+        {
+          "action": "expect_visible",
+          "target": {
+            "by": "testid",
+            "value": "username",
+            "exact": false
+          },
+          "description": "验证返回登录页面"
+        },
+        {
+          "action": "expect_hidden",
+          "target": {
+            "by": "testid",
+            "value": "cart-count",
+            "exact": false
+          },
+          "description": "验证购物车清空"
+        }
+      ],
+      "tags": [
+        "退出登录",
+        "清空购物车"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ShopMini · 演示商城</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="topbar">
+        <a class="brand" href="./">ShopMini<span>演示站</span></a>
+        <div class="cart-pill" aria-label="购物车摘要">
+          购物车
+          <strong data-testid="cart-count">0</strong>
+        </div>
+      </header>
+
+      <main>
+        <section id="login-view" class="login-layout">
+          <div class="hero">
+            <p class="eyebrow">E2E TEST PLAYGROUND</p>
+            <h1>把需求变成<br />可执行的测试</h1>
+            <p class="hero-copy">
+              这是一个自带小缺陷的演示商城，用来跑 <code>ai-qa-runner</code>。
+              默认全部正常；加上 <code>?bugs=1</code> 会注入 3 个真实缺陷。
+            </p>
+            <ul class="hero-list">
+              <li>登录校验与错误提示</li>
+              <li>商品搜索与筛选</li>
+              <li>购物车数量与金额计算</li>
+            </ul>
+          </div>
+
+          <form id="login-form" class="card login-card" novalidate>
+            <h2>登录</h2>
+            <p class="muted">演示账号：alice / secret123</p>
+
+            <label for="username">用户名</label>
+            <input
+              id="username"
+              name="username"
+              data-testid="username"
+              autocomplete="username"
+              placeholder="请输入用户名"
+            />
+
+            <label for="password">密码</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              data-testid="password"
+              autocomplete="current-password"
+              placeholder="请输入密码"
+            />
+
+            <p id="login-message" class="message" role="alert" data-testid="login-message"></p>
+
+            <button type="submit" class="primary" data-testid="login-button">登录</button>
+          </form>
+        </section>
+
+        <section id="shop-view" hidden>
+          <div class="shop-head">
+            <div>
+              <p class="eyebrow">SHOPMINI / CATALOG</p>
+              <h1 class="welcome">欢迎回来，<span id="user-name">alice</span></h1>
+            </div>
+            <button id="logout" class="ghost" type="button">退出登录</button>
+          </div>
+
+          <div class="toolbar">
+            <input
+              id="search"
+              type="search"
+              data-testid="search"
+              aria-label="搜索商品"
+              placeholder="搜索商品，例如：键盘"
+            />
+            <p class="count" data-testid="product-count">共 4 件商品</p>
+          </div>
+
+          <div id="product-grid" class="grid"></div>
+
+          <aside class="cart-panel">
+            <div>
+              <p class="muted">购物车合计</p>
+              <p class="total" data-testid="cart-total">¥0</p>
+            </div>
+            <p class="muted">价格含税 · 演示数据</p>
+          </aside>
+        </section>
+      </main>
+
+      <footer>
+        <span>ShopMini</span>
+        <span>用于 ai-qa-runner 的离线被测应用</span>
+      </footer>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
