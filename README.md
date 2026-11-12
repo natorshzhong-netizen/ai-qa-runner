@@ -8,6 +8,8 @@
 
 ![运行报告](docs/report.png)
 
+> 一步一步操作 + 代码地图 + 面试讲法：[docs/walkthrough.md](docs/walkthrough.md)
+
 ## 它解决什么问题
 
 大多数「AI 写测试」停在生成一段代码：选择器是编的，跑挂了不知道为什么，结果没法比较。
